@@ -36,6 +36,18 @@ return [
             'throw' => false,
         ],
 
+        'http' => [
+            'driver' => 'local',
+            'root' => app_path('Repositories'),
+            'throw' => false,
+        ],
+
+        'model' => [
+            'driver' => 'local',
+            'root' => app_path('Model'),
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
