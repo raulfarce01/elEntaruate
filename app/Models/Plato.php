@@ -31,4 +31,35 @@ class Plato extends Model
         return $this->belongsToMany(Pedido::class, 'plato_pedidos', 'platoId', 'pedidoId');
     }
 
+    public static function addPlato($nombre, $ruta, $ingredientes){
+        $plato = new Plato();
+        $allPlatos = Plato::all();
+        $existe = false;
+
+        foreach ($allPlatos as $platoDB){
+
+            if(strtoupper($platoDB->name) == strtoupper($nombre)){
+                $existe = true;
+            }
+
+        }
+
+        if(!$existe){
+            $plato->nombre = $nombre;
+            $plato->ruta = $ruta;
+
+            foreach ($ingredientes as $ingrediente){
+
+                $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
+                $plato->ingredientes()->attach($ingredienteLast->id);
+
+            }
+
+            return redirect('/platos');
+        }
+
+        return redirect('/');
+
+    }
+
 }
