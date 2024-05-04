@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CuponController;
@@ -19,7 +19,7 @@ use App\Http\Controllers\ReservasController;
 |
 */
 
-Route::get('/', [indexController::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'])->name('index');
 
 
 Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos_lista');
