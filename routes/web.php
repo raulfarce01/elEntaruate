@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CuponController;
+use App\Http\Controllers\PlatoController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\ReservasController;
 
 /*
 |--------------------------------------------------------------------------
