@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->date('caducidad')->nullable();
             $table->integer('porcentaje')->nullable();
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cupons');
+        Schema::dropIfExists('cupones');
     }
 };

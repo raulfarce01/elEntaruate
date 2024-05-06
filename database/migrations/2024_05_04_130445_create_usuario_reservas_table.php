@@ -15,16 +15,12 @@ return new class extends Migration
             $table->id();
             $table->datetime('fecha');
             $table->unsignedBigInteger('userId');
-            $table->unsignedBigInteger('platoId');
             $table->timestamps();
 
             $table->foreign('userId')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('platoId')
-                ->references('id')->on('platos')
-                ->onDelete('cascade');
         });
     }
 

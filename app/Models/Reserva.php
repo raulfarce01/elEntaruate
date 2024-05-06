@@ -6,11 +6,11 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Mesa extends Model
+class Reserva extends Model
 {
     use HasFactory;
 
-    protected $table = 'mesas';
-
-
+    public function user(){
+        return $this->HasOne(User::class);
+    }
 }

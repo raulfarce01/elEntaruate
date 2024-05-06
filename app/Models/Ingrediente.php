@@ -20,24 +20,35 @@ class Ingrediente extends Model
     public static function addIngrediente($name){
         $existe = false;
         $allIngredientes = Ingrediente::all();
-        $ingrediente = new Ingrediente();
+        $ingredienteNew = new Ingrediente();
 
-        if($ingrediente != null && $ingrediente != "" && strlen($name) > 0){
+        if($name != null && $name != "" && strlen($name) == 0 && count($allIngredientes) > 0){
 
             foreach ($allIngredientes as $ingredienteDB){
                 if(strtoupper($name) == strtoupper($ingredienteDB->name)){
                     $existe = true;
+                    return $ingredienteDB;
                 }
             }
 
         }else{
-            return new Response(json_encode(array( "result" => -1, "message" => "El nombre indicado para el ingrediente no es válido." )));
+
+            $ingredienteNew->nombre = $name;
+            $ingredienteNew->save();
+
+            return $ingredienteNew;
+
         }
 
         if(!$existe){
-            $ingrediente->name = $name;
-            $ingrediente->save();
+            $ingredienteNew->nombre = $name;
+            $ingredienteNew->save();
+
+            return $ingredienteNew;
         }
+
+        return new Response(json_encode(array( "result" => -1, "message" => "El nombre indicado para el ingrediente no es válido." )));
+
 
     }
 }
