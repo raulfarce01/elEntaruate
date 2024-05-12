@@ -22,10 +22,10 @@ class Ingrediente extends Model
         $allIngredientes = Ingrediente::all();
         $ingredienteNew = new Ingrediente();
 
-        if($name != null && $name != "" && strlen($name) == 0 && count($allIngredientes) > 0){
+        if(count($allIngredientes) > 0){
 
             foreach ($allIngredientes as $ingredienteDB){
-                if(strtoupper($name) == strtoupper($ingredienteDB->name)){
+                if(strtoupper($name) == strtoupper($ingredienteDB->nombre)){
                     $existe = true;
                     return $ingredienteDB;
                 }

@@ -16,23 +16,7 @@ class PlatoController extends Controller
         $ruta = $request->input('ruta');
         $ingredientes = $request->input('ingredientes', []);
 
-        $platoLast = Plato::addPlato($nombre, $ruta, $ingredientes);
-        foreach ($ingredientes as $ingrediente){
-
-            $ingredienteNew = Ingrediente::find($ingrediente);
-
-            if(isset($ingredienteNew)){
-
-                $ingredienteLast = $ingredienteNew->id;
-
-            }else{
-
-                $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
-
-            }
-            $platoLast->ingredientes()->attach($ingredienteLast->id);
-
-        }
+        $platoLastId = Plato::addPlato($nombre, $ruta, $ingredientes);
 
         return view('/platos');
 

@@ -40,15 +40,53 @@ class Plato extends Model
 
         foreach ($allPlatos as $platoDB){
 
-            if(strtoupper($platoDB->name) == strtoupper($nombre)){
+            if(strtoupper($platoDB->nombre) == strtoupper($nombre)){
                 $existe = true;
+                $plato = $platoDB;
             }
 
         }
 
         if(!$existe){
             $plato->nombre = $nombre;
-            $plato->ruta = $ruta;
+            $plato->rutaImagen = $ruta;
+            $plato->save();
+
+            foreach($ingredientes as $ingrediente){
+
+                $ingredienteNew = Ingrediente::find($ingrediente);
+
+                if(isset($ingredienteNew) && $ingredienteNew != null){
+
+                    $ingredienteLast = $ingredienteNew->id;
+
+                }else{
+
+                    $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
+
+                }
+                $plato->ingredientes()->attach($ingredienteLast->id);
+
+            }
+        }else{
+
+            foreach($ingredientes as $ingrediente){
+
+                $ingredienteNew = Ingrediente::find($ingrediente);
+
+                if(isset($ingredienteNew) && $ingredienteNew != null){
+
+                    $ingredienteLast = $ingredienteNew->id;
+
+                }else{
+
+                    $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
+
+                }
+                $plato->ingredientes()->attach($ingredienteLast->id);
+
+            }
+
         }
 
         return $plato;
