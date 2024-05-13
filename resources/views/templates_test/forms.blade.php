@@ -26,7 +26,8 @@
     <label for="descripcion">descripcion: </label>
     <input type="text" name="descripcion" id="descripcion" placeholder="Put the title here...">
     <label for="caducidad">caducidad: </label>
-    <input type="text" name="caducidad" id="caducidad" placeholder="Put the title here...">
+    <input type="date" name="caducidadDate" id="caducidadDate" placeholder="Put the title here...">
+    <input type="time" name="caducidadHour" id="caducidadHour" placeholder="Put the title here...">
     <label for="porcentaje">porcentaje: </label>
     <input type="text" name="porcentaje" id="porcentaje" placeholder="Put the title here...">
     <button type="submit">Guardar Cupón</button>

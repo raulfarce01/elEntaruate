@@ -13,8 +13,11 @@ class CuponController extends Controller
 
         $nombre = $request->input('nombre');
         $descripcion = $request->input('descripcion');
-        $caducidad = $request->input('caducidad');
+        $caducidadDate = $request->input('caducidadDate');
+        $caducidadHour = $request->input('caducidadHour');
         $porcentaje = $request->input('porcentaje');
+
+        $caducidad = date_create($caducidadDate.' '.$caducidadHour);
 
         return Cupon::addCupon($nombre, $descripcion, $caducidad, $porcentaje);
 

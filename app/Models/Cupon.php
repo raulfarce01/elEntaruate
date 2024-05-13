@@ -17,10 +17,10 @@ class Cupon extends Model
         return $this->belongsToMany(Plato::class, 'cupon_platos', 'cuponId', 'platoId');
     }
 
-    public function addCupon($nombre, $descripcion, $caducidad = 0, $porcentaje = 0){
+    public static function addCupon($nombre, $descripcion, $caducidad = 0, $porcentaje = 0){
 
         $cupon = new Cupon();
-        $allCupones = Plato::all();
+        $allCupones = Cupon::all();
         $existe = false;
 
         foreach ($allCupones as $cuponDB){
@@ -33,7 +33,7 @@ class Cupon extends Model
 
         if(!$existe){
 
-            $cupon->nombre = $nombre;
+            $cupon->name = $nombre;
             $cupon->descripcion = $descripcion;
             $cupon->porcentaje = $porcentaje;
             $cupon->caducidad = $caducidad;
@@ -47,7 +47,7 @@ class Cupon extends Model
 
     }
 
-    public function removeCupon($idCupon){
+    public static function removeCupon($idCupon){
 
         $cupon = Cupon::find($idCupon);
 

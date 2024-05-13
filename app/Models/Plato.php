@@ -52,40 +52,25 @@ class Plato extends Model
             $plato->rutaImagen = $ruta;
             $plato->save();
 
-            foreach($ingredientes as $ingrediente){
 
-                $ingredienteNew = Ingrediente::find($ingrediente);
+        }
 
-                if(isset($ingredienteNew) && $ingredienteNew != null){
+        $plato->ingredientes()->detach();
 
-                    $ingredienteLast = $ingredienteNew->id;
+        foreach($ingredientes as $ingrediente){
 
-                }else{
+            $ingredienteNew = Ingrediente::find($ingrediente);
 
-                    $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
+            if(isset($ingredienteNew) && $ingredienteNew != null){
 
-                }
-                $plato->ingredientes()->attach($ingredienteLast->id);
+                $ingredienteLast = $ingredienteNew->id;
 
-            }
-        }else{
+            }else{
 
-            foreach($ingredientes as $ingrediente){
-
-                $ingredienteNew = Ingrediente::find($ingrediente);
-
-                if(isset($ingredienteNew) && $ingredienteNew != null){
-
-                    $ingredienteLast = $ingredienteNew->id;
-
-                }else{
-
-                    $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
-
-                }
-                $plato->ingredientes()->attach($ingredienteLast->id);
+                $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
 
             }
+            $plato->ingredientes()->attach($ingredienteLast->id);
 
         }
 

@@ -18,7 +18,7 @@ class PlatoController extends Controller
 
         $platoLastId = Plato::addPlato($nombre, $ruta, $ingredientes);
 
-        return view('/platos');
+        return view('templates/platos_carta');
 
     }
 
