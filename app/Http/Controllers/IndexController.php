@@ -12,4 +12,10 @@ class IndexController extends Controller
         return view('templates_test/forms');
 
     }
+
+    public function index(){
+
+        return view('templates/index');
+
+    }
 }
