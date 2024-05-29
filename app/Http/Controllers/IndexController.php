@@ -18,4 +18,16 @@ class IndexController extends Controller
         return view('templates/index');
 
     }
+
+    public function sobre(){
+
+        return view('templates/sobre');
+
+    }
+
+    public function contacto(){
+
+        return view('templates/contacto');
+
+    }
 }

@@ -20,10 +20,12 @@ use App\Http\Controllers\ReservasController;
 */
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/contacto', [IndexController::class, 'contacto'])->name('contacto');
+Route::get('/sobre', [IndexController::class, 'sobre'])->name('sobre');
 
 
 Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos_lista');
-Route::get('/detalle_pedidos', [PedidoController::class, 'detalles'])->name('pedidos_detalle');
+Route::get('/pedidos/{idPedido}/detalles', [PedidoController::class, 'detalles'])->name('pedidos_detalle');
 Route::get('/estado_pedido/{idPedido}', [PedidoController::class, 'estado'])->name('pedidos_estado');
 Route::post('/add_pedido', [PedidoController::class, 'addPedido'])->name('pedido_add');
 
@@ -54,6 +56,7 @@ Route::post('/add_reserva', [ReservasController::class, 'addReserva'])->name('re
 
 Route::get('/admin_gestion_platos', [PlatoController::class, 'gestion'])->name('platos_gestion');
 Route::get('/admin_reservas', [ReservasController::class, 'reservas'])->name('admin_reservas');
+
 
 Route::get('/test', [IndexController::class, 'test'])->name('test');
 
