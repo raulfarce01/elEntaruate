@@ -1,7 +1,7 @@
 @extends('templates/baseTemplate')
 @section('title', 'Mesón Sagrada Familia')
 @section('main')
-<div id="modalReserva" class="hidden absolute w-screen h-screen bg-black/70 z-50">
+<div id="modalReserva" class="hidden absolute w-full h-screen bg-black/70 z-50">
     <div id="contentModalReserva" class="m-auto h-4/5 w-4/5 md:w-1/3 bg-white rounded-lg">
         <div id="topModalReserva" class="flex justify-end h-10">
             <i id="closeModalReserva" class="fa-solid fa-xmark cursor-pointer text-3xl p-2 h-fit"></i>
@@ -11,7 +11,7 @@
         </div>
     </div>
 </div>
-<div id="contenedorImagenIndex" style="background-image: url({{ asset('img_estaticas/index.png') }}); backgroud-position: center; background-size: cover; background-repeat: no-repeat; background-origin: border-box; flex flex-col justifybetween" class="w-screen h-screen">
+<div id="contenedorImagenIndex" style="background-image: url({{ asset('img_estaticas/index.png') }}); backgroud-position: center; background-size: cover; background-repeat: no-repeat; background-origin: border-box; flex flex-col justifybetween" class="w-full h-screen">
     <div id="contenedorIndex" class="h-full w-full bg-black/50 flex flex-col justify-center items-center text-white gap-3">
         <h1 class="font-bold md:text-5xl text-3xl">Mesón Sagrada Familia</h1>
         <p class="italic md:text-xl">Calle sin nombre, 8</p>
