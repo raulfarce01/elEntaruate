@@ -59,17 +59,22 @@ class Plato extends Model
 
         foreach($ingredientes as $ingrediente){
 
+            $añadeIngredientes = [];
             $ingredienteNew = Ingrediente::find($ingrediente);
 
             if(isset($ingredienteNew) && $ingredienteNew != null){
 
                 $ingredienteLast = $ingredienteNew->id;
+                dd('hola'. $ingredienteLast);
 
             }else{
 
                 $ingredienteLast = Ingrediente::addIngrediente($ingrediente);
 
             }
+
+            $añadeIngredientes[] = $ingredienteLast;
+
             $plato->ingredientes()->attach($ingredienteLast->id);
 
         }

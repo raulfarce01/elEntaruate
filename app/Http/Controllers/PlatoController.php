@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Plato;
 use App\Models\Ingrediente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\HasTeams;
 
 class PlatoController extends Controller
 {
@@ -18,7 +20,9 @@ class PlatoController extends Controller
 
         $platoLastId = Plato::addPlato($nombre, $ruta, $ingredientes);
 
-        return view('templates/platos_carta');
+        $allIngredientes = Ingrediente::all();
+
+        return view('templates/platos_gestion', ['allIngredientes' => $allIngredientes]);
 
     }
 
@@ -41,6 +45,34 @@ class PlatoController extends Controller
     public function editPlato($idPlato){
 
         return view('templates/platos_edit');
+
+    }
+
+    public function index(){
+
+        return view('templates/platos_carta');
+
+    }
+
+    public function gestion(){
+
+        if(Auth::user()){
+
+            $user = Auth::user();
+
+            if($user->currentTeam->name == 'Admin'){
+
+                $allIngredientes = Ingrediente::all();
+
+                return view('templates/platos_gestion', ['allIngredientes' => $allIngredientes]);
+
+            }
+
+            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+
+        }
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
 
     }
 }

@@ -1,5 +1,6 @@
 let closeModalReserva = $('#closeModalReserva');
 let flechaIndex = $('#flechaIndex');
+let cerrarModalError = $('#cerrarModalError');
 
 function abreModalReserva(idUser) {
     $("html, body").animate({
@@ -26,4 +27,9 @@ flechaIndex.on('click', function () {
     $([document.documentElement, document.body]).animate({
         scrollTop: $("#familia").offset().top
     }, 500);
+});
+
+cerrarModalError.on('click', function () {
+    $('#modalError').removeClass('flex');
+    $('#modalError').addClass('hidden');
 });

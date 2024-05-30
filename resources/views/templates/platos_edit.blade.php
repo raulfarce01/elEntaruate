@@ -1,2 +1,2 @@
 @extends('templates/baseTemplate')
-@section('title', 'Mesón Sagrada Familia')
+@section('title', 'Edit Platos | Mesón Sagrada Familia')

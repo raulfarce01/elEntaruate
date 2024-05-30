@@ -124,11 +124,11 @@ class User extends Authenticatable
 
         if(isset($reservaId) && $reservaId > 0){
 
-            return redirect('/reservas/user');
+            return redirect('/user/reservas');
 
         }
 
-        return redirect('/reservas/user');
+        return redirect('/user/reservas');
 
 
     }
@@ -139,7 +139,7 @@ class User extends Authenticatable
 
         $reserva->delete();
 
-        return redirect('/reservas/user');
+        return redirect('/user/reservas');
 
     }
 }

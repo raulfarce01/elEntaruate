@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
 use App\Models\User;
-use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
+
 
 class UserController extends Controller
 {
@@ -55,6 +58,60 @@ class UserController extends Controller
 
 
         return view('templates/user_reservas', ['reservas' => $res]);
+
+    }
+
+    public function index(Request $request){
+
+        $updateUser = $request->input('updateUser');
+        $passwd = $request->input('password');
+        $confirmPasswd = $request->input('password_confirmation');
+        $email = $request->input('email');
+        $telefono = $request->input('telefono');
+
+        if($updateUser != null){
+
+            if($passwd == $confirmPasswd){
+
+            $revisaEmail = DB::table('users')->where('email', $email)->get();
+
+            if($revisaEmail->count() > 0){
+
+                return view('templates/user_perfil', ['user' => auth()->user(), 'error' => 'El correo ya está siendo usado']);
+
+            }
+
+            $revisaTelefono = DB::table('users')->where('telefono', $telefono)->get();
+
+            if($revisaTelefono->count() > 0){
+
+                return view('templates/user_perfil', ['user' => auth()->user(), 'error' => 'El teléfono ya está siendo usado']);
+
+            }
+
+            DB::transaction(function () use ($request) {
+                return tap(User::find(auth()->user()->id)->update([
+                    'telefono' => $request['telefono'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password']),
+                ]));
+            });
+
+            }else{
+
+                return view('templates/user_perfil', ['user' => auth()->user(), 'error' => 'Las contraseñas no coinciden']);
+
+            }
+        }
+
+        if(Auth::user()){
+
+            return view('templates/user_perfil', ['user' => auth()->user()]);
+
+        }
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver tu perfil']);
+
 
     }
 }

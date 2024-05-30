@@ -20,6 +20,15 @@
             <div id="navButtons" class="md:flex md:gap-10 hidden">
                 <a href="/">Inicio</a>
                 <a href="/carta">Carta</a>
+                @if(Auth::user())
+                    <a href="/cupones">Cupones</a>
+                    @foreach (Auth::user()->allTeams() as $team)
+                        @if($team->name == 'Admin')
+                            <a href="/admin_gestion_platos">Gestión Platos</a>
+                            <a href="/admin_reservas">Gestión Reservas</a>
+                        @endif
+                    @endforeach
+                @endif
             </div>
         </div>
 
@@ -28,10 +37,10 @@
             @if (Auth::user())
                 <p id="userHeader" class="cursor-pointer">Hola, {{ Auth::user()->name }} <i id="" class="fa-solid fa-angle-down"></i></p>
                 <div id="desplegableUser" class="absolute z-50 bg-black text-white rounded-md px-6 py-4 flex flex-col gap-4 justify-around items-center w-60 right-6 top-14 hidden">
-                    <a href="/pedidos">Mis Pedidos</a>
-                    <a href="/user/{{ Auth::user()->id }}">Mi Perfil</a>
-                    <a href="/user/{{ Auth::user()->id }}/favoritos">Mis Favoritos</a>
-                    <a href="/user/{{ Auth::user()->id }}/reservas">Mis Reservas</a>
+                    <a href="/user/pedidos">Mis Pedidos</a>
+                    <a href="/user">Mi Perfil</a>
+                    <a href="/user/favoritos">Mis Favoritos</a>
+                    <a href="/user/reservas">Mis Reservas</a>
                     <a href="/logout">Cerrar sesión</a>
                 </div>
             @else
@@ -63,10 +72,10 @@
                     <a href="/contacto">Contacto</a>
                     <a href="/sobre">¿Quiénes somos?</a>
                     @if (Auth::user())
-                        <a href="/pedidos">Mis Pedidos</a>
-                        <a href="/user/{{ Auth::user()->id }}">Mi Perfil</a>
-                        <a href="/user/{{ Auth::user()->id }}/favoritos">Mis Favoritos</a>
-                        <a href="/user/{{ Auth::user()->id }}/reservas">Mis Reservas</a>
+                        <a href="/user/pedidos">Mis Pedidos</a>
+                        <a href="/user">Mi Perfil</a>
+                        <a href="/user/favoritos">Mis Favoritos</a>
+                        <a href="/user/reservas">Mis Reservas</a>
                     @endif
                 </div>
             </div>
@@ -81,7 +90,7 @@
         </div>
     </nav>
 
-    <main class="min-h-screen text-white">
+    <main class="min-h-screen text-white overflow-x-hidden">
         @yield('main')
     </main>
 

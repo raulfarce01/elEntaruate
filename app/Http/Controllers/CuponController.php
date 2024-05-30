@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cupon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CuponController extends Controller
 {
@@ -26,6 +27,18 @@ class CuponController extends Controller
     public function removeCupon($cuponId){
 
         return Cupon::removeCupon($cuponId);
+
+    }
+
+    public function index(){
+
+        if(Auth::user()){
+
+            return view('templates/cupones');
+
+        }
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver tu perfil']);
 
     }
 }

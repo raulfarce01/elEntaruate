@@ -2,6 +2,17 @@
 @section('title', 'Mesón Sagrada Familia')
 @section('main')
 @include('templates/modales/modalReserva')
+@if (isset($error))
+    <div id="modalError" class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black/70 flex-col">
+        <div class="text-black bg-white rounded-md py-10 px-8 font-bold">
+            <p>{{ $error }}</p>
+            <div id="cerrarModalError" class="flex flex-col bg-black rounded-full text-white font-bold py-2 px-4 cursor-pointer mt-7">
+                <p class="text-center">Aceptar</p>
+            </div>
+        </div>
+
+    </div>
+@endif
 <section id="contenedorImagenIndex" style="background-image: url({{ asset('img_estaticas/index.png') }}); backgroud-position: center; background-size: cover; background-repeat: no-repeat; background-origin: border-box; flex flex-col justifybetween" class="w-full h-screen">
     <div id="contenedorIndex" class="h-full w-full bg-black/50 flex flex-col justify-center items-center text-white gap-3">
         <h1 class="font-bold md:text-5xl text-3xl">Mesón Sagrada Familia</h1>

@@ -30,7 +30,7 @@ class ReservasController extends Controller
 
         }
 
-        return redirect('/reservas/user');
+        return redirect('/user/reservas');
 
     }
 

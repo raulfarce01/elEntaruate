@@ -43,12 +43,15 @@ Route::get('/cupon_detalle/{idCupon}', [CuponController::class, 'detalles'])->na
 Route::post('/add_cupon', [CuponController::class, 'addCupon'])->name('cupon_add');
 /*Remove*/ Route::post('/remove_cupon/{idCupon}', [CuponController::class, 'removeCupon'])->name('cupon_remove');
 
-Route::get('/user/{idUser}/favoritos', [UserController::class, 'favoritos'])->name('user_favoritos');
-Route::get('/user/{idUser}', [UserController::class, 'index'])->name('user');
-Route::get('/reservas/user', [UserController::class, 'pageReservasUser'])->name('user_reservas');
+Route::get('/user/favoritos', [UserController::class, 'favoritos'])->name('user_favoritos');
+Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/user/reservas', [UserController::class, 'pageReservasUser'])->name('user_reservas');
+Route::get('/user/pedidos', [UserController::class, 'pedidos'])->name('user_pedidos');
 Route::get('/getReservas/user', [UserController::class, 'reservasUser'])->name('user_reservas');
 Route::post('/add_favorito/{platoId}', [UserController::class, 'addFavorito'])->name('favorito_add');
 /*Remove*/ Route::post('/remove_favorito/{idFavorito}', [UserController::class, 'removeFavorito'])->name('favorito_remove');
+Route::post('/user', [UserController::class, 'index'])->name('user_update');
+
 
 
 Route::post('/add_reserva', [ReservasController::class, 'addReserva'])->name('reserva_add');

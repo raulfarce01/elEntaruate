@@ -1,5 +1,5 @@
 @extends('templates/baseTemplate')
-@section('title', 'Mesón Sagrada Familia')
+@section('title', 'Mis Reservas | Mesón Sagrada Familia')
 @section('main')
 @include('templates/modales/modalReserva')
 
