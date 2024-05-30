@@ -81,7 +81,7 @@
         </div>
     </nav>
 
-    <main class="min-h-screen">
+    <main class="min-h-screen text-white">
         @yield('main')
     </main>
 

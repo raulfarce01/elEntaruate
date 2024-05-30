@@ -45,7 +45,8 @@ Route::post('/add_cupon', [CuponController::class, 'addCupon'])->name('cupon_add
 
 Route::get('/user/{idUser}/favoritos', [UserController::class, 'favoritos'])->name('user_favoritos');
 Route::get('/user/{idUser}', [UserController::class, 'index'])->name('user');
-Route::get('/user/{idUser}/reservas', [UserController::class, 'reservasUser'])->name('user_reservas');
+Route::get('/reservas/user', [UserController::class, 'pageReservasUser'])->name('user_reservas');
+Route::get('/getReservas/user', [UserController::class, 'reservasUser'])->name('user_reservas');
 Route::post('/add_favorito/{platoId}', [UserController::class, 'addFavorito'])->name('favorito_add');
 /*Remove*/ Route::post('/remove_favorito/{idFavorito}', [UserController::class, 'removeFavorito'])->name('favorito_remove');
 

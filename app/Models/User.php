@@ -76,7 +76,7 @@ class User extends Authenticatable
     }
 
     public function reservas(){
-        return $this->belongsToMany(Mesa::class, 'usuario_reservas', 'userId', 'mesaId');
+        return $this->hasOne(Reserva::class, 'userId', 'id');
     }
 
     public static function addFavorito($platoId){
@@ -113,21 +113,22 @@ class User extends Authenticatable
 
     }
 
-    public static function addReserva($fecha, $user){
+    public static function addReserva($fecha, $user, $nombre){
 
         $reserva = new Reserva();
 
         $reserva->fecha = $fecha;
-        $reserva->user()->attach($user);
+        $reserva->nombre = $nombre;
+        $reserva->userId = $user;
         $reservaId = $reserva->save();
 
         if(isset($reservaId) && $reservaId > 0){
 
-            return new Response(json_encode(array( "result" => 1, "message" => "Reserva realizada correctamente." )));
+            return redirect('/reservas/user');
 
         }
 
-        return new Response(json_encode(array( "result" => -1, "message" => "Ha ocurrido un error con su reserva. Inténtelo de nuevo." )));
+        return redirect('/reservas/user');
 
 
     }
@@ -137,6 +138,8 @@ class User extends Authenticatable
         $reserva = Reserva::find($idReserva);
 
         $reserva->delete();
+
+        return redirect('/reservas/user');
 
     }
 }
