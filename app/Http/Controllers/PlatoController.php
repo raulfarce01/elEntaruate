@@ -128,7 +128,10 @@ class PlatoController extends Controller
     public function index(){
 
         $allPlatos = DB::table('platos')->orderBy('id', 'desc')->get();
-        $favoritos = DB::table('favoritos')->where('userId', Auth::user()->id)->get();
+        $favoritos = [];
+        if(Auth::user()) {
+            $favoritos = DB::table('favoritos')->where('userId', Auth::user()->id)->get();
+        }
 
         foreach($allPlatos as $plato){
 

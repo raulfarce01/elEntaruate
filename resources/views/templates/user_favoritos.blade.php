@@ -2,7 +2,13 @@
 @section('title', 'Mis Favoritos | Mesón Sagrada Familia')
 @section('main')
 
-<section id="listaFavoritos" class="grid grid-cols-2 md:grid-cols-4 gap-5 py-6 pb-12 px-4 pt-24">
+<section id="portada" style="background-image: url({{ asset('img_estaticas/portadaCarta.png') }}); backgroud-position: center; background-size: cover; background-repeat: no-repeat; background-origin: border-box; flex flex-col justifybetween" class="w-full h-72">
+    <div id="contenedorPortada" class="h-full w-full bg-black/30 flex flex-col justify-center items-center text-white gap-3 pt-32">
+        <h1 class="font-bold md:text-5xl text-3xl">Mis Platos Favoritos</h1>
+    </div>
+</section>
+
+<section id="listaFavoritos" class="grid grid-cols-2 md:grid-cols-4 gap-5 py-6 pb-12 px-4 pt-10">
 
     @foreach ($favoritos as $plato)
 

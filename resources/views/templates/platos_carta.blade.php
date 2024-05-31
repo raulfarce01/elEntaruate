@@ -39,6 +39,7 @@
 
             <div id="footerCarta" class="pt-6 flex justify-between">
                 <div id="precio" class="font-bold">{{ $plato->precio }}€/ración</div>
+                @if (Auth::user())
                     @if ($favoritos->contains('platoId', $plato->id))
                     <form action="/remove_favorito/{{ $favoritos->where('platoId', $plato->id)->first()->id }}" method="POST">
                         @csrf
@@ -54,6 +55,7 @@
                         </button>
                     </form>
                     @endif
+                @endif
             </div>
 
         </div>
