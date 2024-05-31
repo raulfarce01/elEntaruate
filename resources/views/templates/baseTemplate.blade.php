@@ -70,13 +70,19 @@
                 <div id="mobileEnlaces" class="flex flex-col gap-6">
                     <a href="/">Inicio</a>
                     <a href="/carta">Carta</a>
-                    <a href="/contacto">Contacto</a>
-                    <a href="/sobre">¿Quiénes somos?</a>
                     @if (Auth::user())
+                        <a href="/cupones">Cupones</a>
                         <a href="/user/pedidos">Mis Pedidos</a>
                         <a href="/user">Mi Perfil</a>
                         <a href="/user/favoritos">Mis Favoritos</a>
                         <a href="/user/reservas">Mis Reservas</a>
+
+                        @foreach (Auth::user()->allTeams() as $team)
+                        @if($team->name == 'Admin')
+                            <a href="/admin_gestion_platos">Gestión Platos</a>
+                            <a href="/admin_reservas">Gestión Reservas</a>
+                        @endif
+                    @endforeach
                     @endif
                 </div>
             </div>
