@@ -1,6 +1,6 @@
-<div id="modalPlato" class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black/70">
+<div id="modalPlato" class="absolute top-0 left-0 w-full h-full overflow-auto flex justify-center items-center bg-black/70 hidden z-50">
 
-    <div id="contentPlato" class="text-black bg-white rounded-md py-10 px-8 font-bold w-2/3">
+    <div id="contentPlato" class="text-black bg-white rounded-md py-10 px-8 font-bold w-2/3 overflow-auto">
 
         <div id="topModalPlato" class="flex justify-end h-10">
             <i id="closeModalPlato" class="fa-solid fa-xmark cursor-pointer text-3xl p-2 h-fit"></i>
@@ -9,25 +9,24 @@
         <div id="contentModalPlato">
 
             <h3 id="nombrePlato" class="text-3xl font-bold text-center py-4">Añadir Plato</h3>
-            <form action="/add_plato" method="post">
+            <form action="/add_plato" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="flex items-center justify-center w-full">
-                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-transparent dark:hover:bg-bray-800 dark:bg-transparent hover:bg-gray-800 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                            </svg>
-                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Haz click aqui</span></p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG</p>
-                        </div>
-                        <input id="dropzone-file" type="file" name="ruta" class="hidden" />
-                    </label>
+                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"
+                    name="ruta">
+
                 </div>
 
-                <div id="divNombrePlato" class="flex flex-col pt-10">
-                    <label for="nombrePlato">Nombre:</label>
-                    <input type="text" name="nombre" id="nombrePlato" class="border-x-0 border-t-0 bg-transparent">
+                <div id="nombrePrecio" class="pt-10 flex gap-3">
+                    <div id="divNombrePlato" class="flex flex-col w-4/5">
+                        <label for="nombrePlato">Nombre:</label>
+                        <input type="text" name="nombre" id="nombrePlato" class="border-x-0 border-t-0 bg-transparent">
+                    </div>
+                    <div id="divPrecioPlato" class="flex flex-col">
+                        <label for="precioPlato">Precio:</label>
+                        <input type="number" name="precio" id="precioPlato" class="border-x-0 border-t-0 bg-transparent" min="0" value="0" step=".01">
+                    </div>
                 </div>
 
                 <div id="divIngredientesPlato" class="py-8">

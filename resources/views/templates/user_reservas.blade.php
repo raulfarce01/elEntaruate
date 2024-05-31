@@ -3,7 +3,15 @@
 @section('main')
 @include('templates/modales/modalReserva')
 
-<h2 class="text-4xl font-bold text-center pt-24">Mis Reservas</h2>
+<section id="GestionReservasHeader" class="h-60" style="background-image: url({{ asset('img_estaticas/reservado.jpg') }}); backgroud-position: center; background-size: cover; background-repeat: no-repeat; background-origin: border-box; flex flex-col">
+
+    <div id="headerReservas" class="w-full h-full bg-black/50 flex flex-col justify-center items-center">
+
+        <h3 class="text-3xl text-white font-bold pt-20">Mis Reservas</h3>
+
+    </div>
+
+</section>
 
 <section id="sectionReservas">
 
@@ -21,7 +29,7 @@
         <tbody id="tablaReservasBody" class="text-white">
             @if (count($reservas) > 0)
             @foreach ($reservas as $reserva)
-            <tr>
+            <tr class="h-10">
                 <td class="text-center">{{ $reserva['nombre'] }}</td>
                 <td class="text-center">{{ $reserva['fecha'] }}</td>
                 <td class="text-center">{{ $reserva['hora'] }}</td>

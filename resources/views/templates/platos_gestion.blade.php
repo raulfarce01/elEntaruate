@@ -9,11 +9,41 @@
     </div>
 </section>
 
-<section id="platos" class="grid grid-cols-2 md:grid-cols-4 gap-5">
+<section id="platos" class="">
 
     <div id="topPlatos" class="w-full h-full md:col-span-4 col-span-2 py-5 px-6 flex justify-end items-center">
         <div id="abrirModalPlato" class="cursor-pointer text-black bg-white rounded-full py-2 px-6 font-bold w-fit">Añadir Plato</div>
     </div>
+
+    <table id="platosTable" class="w-full">
+        <thead>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            @foreach ($allPlatos as $plato)
+            <tr class="">
+                <td class="text-center">{{ $plato['id'] }}</td>
+                <td class="text-center">{{ $plato['nombre'] }}</td>
+                <td class="text-center">{{ $plato['precio'] }}</td>
+                <td class="text-center flex items-center justify-center"><img class="w-32" src="{{ asset('/img') ."/". $plato['rutaImagen'] }}" alt="{{ $plato['rutaImagen'] }}"></td>
+                <td class="text-center">
+                    <form action="{{ route('platos_edit', $plato['id']) }}" method="GET" class="inline w-fit me-1">
+                        @csrf
+                        <button type="submit" class="text-yellow-500"><i class="fa-solid text-yellow-500 fa-gear"></i></button>
+                    </form>
+                    <form action="{{ route('plato_remove', $plato['id']) }}" method="POST" class="inline w-fit">
+                        @csrf
+                        <button type="submit" class="text-red-500"><i class="fa-solid text-red-500 fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 
 </section>
 

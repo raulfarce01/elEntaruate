@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Plato;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -112,6 +113,31 @@ class UserController extends Controller
 
         return view('templates/index', ['error' => 'Debes iniciar sesión para ver tu perfil']);
 
+    }
+
+    public function favoritos(){
+
+        if(Auth::user()){
+
+            $allFavoritos = DB::select("SELECT * FROM favoritos INNER JOIN platos ON favoritos.platoId = platos.id WHERE userId = " . auth()->user()->id);
+
+            foreach($allFavoritos as $plato){
+
+                $plato->ingredientes = Plato::with('ingredientes')->find($plato->id)->ingredientes;
+
+            }
+
+            return view('templates/user_favoritos', ['user' => auth()->user(), 'favoritos' => $allFavoritos]);
+
+        }
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver tu perfil']);
+
+    }
+
+    public function removeFavoritoUser($idPlato){
+
+        return User::removeFavoritoUser($idPlato);
 
     }
 }

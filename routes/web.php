@@ -34,7 +34,7 @@ Route::get('/carta', [PlatoController::class, 'index'])->name('platos_carta');
 Route::get('/plato_detalle/{idPlato}', [PlatoController::class, 'detalles'])->name('platos_detalle');
 Route::get('/plato_edit/{idPlato}', [PlatoController::class, 'editPlato'])->name('platos_edit');
 Route::post('/add_plato', [PlatoController::class, 'addPlato'])->name('plato_add');
-Route::post('/plato_edit/{idPlato}', [PlatoController::class, 'updatePlato'])->name('plato_edit_post');
+Route::post('/plato_edit_post/{idPlato}', [PlatoController::class, 'updatePlato'])->name('plato_edit_post');
 /*Remove*/ Route::post('/remove_plato/{idPlato}', [PlatoController::class, 'removePlato'])->name('plato_remove');
 
 
@@ -50,6 +50,8 @@ Route::get('/user/pedidos', [UserController::class, 'pedidos'])->name('user_pedi
 Route::get('/getReservas/user', [UserController::class, 'reservasUser'])->name('user_reservas');
 Route::post('/add_favorito/{platoId}', [UserController::class, 'addFavorito'])->name('favorito_add');
 /*Remove*/ Route::post('/remove_favorito/{idFavorito}', [UserController::class, 'removeFavorito'])->name('favorito_remove');
+/*Remove*/ Route::post('/remove_favorito_user/{idPlato}', [UserController::class, 'removeFavoritoUser'])->name('favorito_remove_user');
+
 Route::post('/user', [UserController::class, 'index'])->name('user_update');
 
 

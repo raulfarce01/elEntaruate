@@ -33,7 +33,7 @@ class Plato extends Model
         return $this->belongsToMany(Pedido::class, 'plato_pedidos', 'platoId', 'pedidoId');
     }
 
-    public static function addPlato($nombre, $ruta, $ingredientes){
+    public static function addPlato($nombre, $ruta, $ingredientes, $precio){
         $plato = new Plato();
         $allPlatos = Plato::all();
         $existe = false;
@@ -47,15 +47,13 @@ class Plato extends Model
 
         }
 
-        if(!$existe){
-            $plato->nombre = $nombre;
-            $plato->rutaImagen = $ruta;
-            $plato->save();
-
-
-        }
+        $plato->nombre = $nombre;
+        $plato->rutaImagen = $ruta;
+        $plato->precio = $precio;
+        $plato->save();
 
         $plato->ingredientes()->detach();
+
 
         foreach($ingredientes as $ingrediente){
 
@@ -65,7 +63,6 @@ class Plato extends Model
             if(isset($ingredienteNew) && $ingredienteNew != null){
 
                 $ingredienteLast = $ingredienteNew->id;
-                dd('hola'. $ingredienteLast);
 
             }else{
 
@@ -82,20 +79,26 @@ class Plato extends Model
         return $plato;
     }
 
-    public static function updatePlato($platoId, $newNombre, $newRuta, $ingredientes){
+    public static function updatePlato($platoId, $newNombre, $newRuta, $precio, $ingredientes){
 
         $plato = Plato::find($platoId);
 
         if(isset($plato)){
 
             $plato->nombre = $newNombre;
-            $plato->ruta = $newRuta;
+            $plato->precio = $precio;
+
+            if($newRuta != null){
+                $plato->rutaImagen = $newRuta;
+            }
+
+            $plato->ingredientes()->detach();
 
             foreach ($ingredientes as $ingrediente){
 
-                $ingrediente = Ingrediente::find($ingrediente);
+                $ingredienteExist = Ingrediente::find($ingrediente);
 
-                if(isset($ingrediente)){
+                if(isset($ingredienteExist) && $ingredienteExist != null){
 
                     $ingredienteLast = $ingrediente->id;
 
@@ -110,7 +113,7 @@ class Plato extends Model
 
             $plato->save();
 
-            return view('templates/platos_edit', [ 'idPlato' => $platoId ]);
+            return redirect('/admin_gestion_platos');
 
         }
 
@@ -125,11 +128,11 @@ class Plato extends Model
         if(isset($plato)){
 
             $plato->delete();
-            return new Response(json_encode(array("result" => 1, "message" => "Plato borrado correctamente")));
+            return redirect('/admin_gestion_platos');
 
         }
 
-        return new Response(json_encode(array( "result" => -1, "message" => "No se ha encontrado el plato con el ID ". $platoId )));
+        return redirect('/admin_gestion_platos');
 
     }
 

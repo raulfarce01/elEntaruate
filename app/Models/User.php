@@ -8,6 +8,7 @@ use App\Models\Pedido;
 use Illuminate\Http\Response;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
@@ -86,30 +87,50 @@ class User extends Authenticatable
 
         if(isset($plato)){
 
+            $user->favoritos()->detach($platoId);
             $user->favoritos()->attach($platoId);
 
-            return new Response(json_encode(array( "result" => 1, "message" => "Se ha añadido el plato con ID " . $platoId . " a favoritos." )));
+            return redirect('/carta');
 
         }
 
-        return new Response(json_encode(array( "result" => -1, "message" => "No se ha encontrado el plato con ID " . $platoId)));
+        return redirect('/carta');
 
     }
 
-    public static function removeFavorito($platoId){
+    public static function removeFavorito($favId){
 
         $user = User::find(Auth::id());
-        $plato = Plato::find($platoId);
+        $fav = DB::table('favoritos')->where('userId', Auth::id())->where('id', $favId)->first();
 
-        if(isset($plato)){
+        dd($favId);
 
-            $user->favoritos()->detach($platoId);
+        if(isset($fav)){
 
-            return new Response(json_encode(array( "result" => 1, "message" => "Se ha eliminado el plato con ID " . $platoId . " de favoritos." )));
+            $user->favoritos()->detach($fav);
+
+            return redirect('/carta');
 
         }
 
-        return new Response(json_encode(array( "result" => -1, "message" => "No se ha encontrado el plato con ID " . $platoId)));
+        return redirect('/carta');
+
+    }
+
+    public static function removeFavoritoUser($idPlato){
+
+        $user = User::find(Auth::id());
+        $fav = DB::table('favoritos')->where('userId', Auth::id())->where('platoId', $idPlato)->first();
+
+        if(isset($fav)){
+
+            $user->favoritos()->detach($fav);
+
+            return redirect('/user/favoritos');
+
+        }
+
+        return redirect('/user/favoritos');
 
     }
 
