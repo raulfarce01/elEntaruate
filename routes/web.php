@@ -41,6 +41,8 @@ Route::post('/plato_edit_post/{idPlato}', [PlatoController::class, 'updatePlato'
 Route::get('/cupones', [CuponController::class, 'index'])->name('cupones_lista');
 Route::get('/cupon_detalle/{idCupon}', [CuponController::class, 'detalles'])->name('cupon_detalle');
 Route::post('/add_cupon', [CuponController::class, 'addCupon'])->name('cupon_add');
+Route::get('/edit_cupon/{idCupon}', [CuponController::class, 'editCupon'])->name('cupon_edit');
+Route::post('/edit_cupon_post/{idCupon}', [CuponController::class, 'editCuponPost'])->name('cupon_edit_post');
 /*Remove*/ Route::post('/remove_cupon/{idCupon}', [CuponController::class, 'removeCupon'])->name('cupon_remove');
 
 Route::get('/user/favoritos', [UserController::class, 'favoritos'])->name('user_favoritos');
