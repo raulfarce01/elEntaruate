@@ -103,7 +103,7 @@ class PedidoController extends Controller
 
     public function index($paginaPedido){
 
-        if(Auth::user()){
+        if(Auth::user() && Auth::user()->currentTeam->name != 'Admin'){
 
             $user = Auth::user();
             $pedidosUser = [];
@@ -130,7 +130,46 @@ class PedidoController extends Controller
 
         }
 
+        if(Auth::user() && Auth::user()->currentTeam->name == 'Admin'){
+
+            $user = Auth::user();
+            $pedidosUser = [];
+
+            $i = 0;
+
+            $pedidos = DB::table('pedidos')->selectRaw(" *, plato_pedidos.id as platoPedidoId")->join('plato_pedidos', 'pedidos.id', '=', 'plato_pedidos.pedidoId')->join('platos', 'plato_pedidos.platoId', '=', 'platos.id')->where('fecha', '=', date('Y-m-d'))->where('estado', '=', 0)->orderBy('pedidoId', 'asc')->get();
+
+            foreach($pedidos as $pedido){
+
+                $pedidosUser[$pedido->pedidoId][$i]['platoPedidoId'] = $pedido->platoPedidoId;
+                $pedidosUser[$pedido->pedidoId][$i]['pedidoId'] = $pedido->pedidoId;
+                $pedidosUser[$pedido->pedidoId][$i]['platoId'] = $pedido->platoId;
+                $pedidosUser[$pedido->pedidoId][$i]['nombre'] = $pedido->nombre;
+                $pedidosUser[$pedido->pedidoId][$i]['rutaImagen'] = $pedido->rutaImagen;
+                $pedidosUser[$pedido->pedidoId][$i]['precio'] = $pedido->precio;
+
+                $i++;
+            }
+
+            return view('templates/pedidos_lista', ['pagina' => $paginaPedido, 'pedidos' => $pedidosUser]);
+
+        }
+
         return view('templates/index', ['error' => 'Debes iniciar sesión para ver tus pedidos']);
+
+    }
+
+    public function finalizarPedido($pedidoId){
+
+        if(Auth::user() && Auth::user()->currentTeam->name == 'Admin'){
+
+            $platoPedido = DB::table('plato_pedidos')->where('id', '=', $pedidoId)->update(['estado' => 1]);
+
+            return redirect('/pedidos/1');
+
+        }
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión como administrador para finalizar los pedidos']);
 
     }
 }

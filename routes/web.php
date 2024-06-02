@@ -28,6 +28,7 @@ Route::get('/pedidos/{paginaPedido}', [PedidoController::class, 'index'])->name(
 Route::get('/new_pedido/{idMesa}', [PedidoController::class, 'newPedido'])->name('pedido_new');
 Route::get('/confirmar_pago', [PedidoController::class, 'confirmarPago'])->name('confirmar_pago');
 Route::post('/add_pedido', [PedidoController::class, 'addPedido'])->name('pedido_add');
+Route::post('/finalizar_plato/{idPlatoPedido}', [PedidoController::class, 'finalizarPedido'])->name('pedido_finalizar');
 
 
 Route::get('/carta', [PlatoController::class, 'index'])->name('platos_carta');

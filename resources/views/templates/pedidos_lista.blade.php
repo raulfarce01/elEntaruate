@@ -44,6 +44,15 @@
 
                 <div id="footerCarta" class="pt-6 flex justify-between">
                     <div id="precio" class="font-bold flex items-center">{{ $plato['precio'] }}€/ración</div>
+
+                    @if (Auth::user()->currentTeam->name == 'Admin')
+                        <form action="/finalizar_plato/{{ $plato['platoPedidoId'] }}" method="post">
+                            @csrf
+                            <button type="submit" class="bg-white text-black font-bold text-center py-2 px-4 rounded">
+                                Finalizar
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
 
@@ -60,8 +69,8 @@
 
     <div id="paginas" class="w-full flex justify-between">
 
-        <a href="/pedidos/{{ $pagina - 1 }}" class="{{ $pagina == 1 ? 'hidden' : '' }} bg-white text-black font-bold text-center py-2 px-4 rounded">Página anterior</a>
-        <a href="/pedidos/{{ $pagina + 1 }}" class="{{ $totalRes < 10 ? 'hidden' : '' }} bg-white text-black font-bold text-center py-2 px-4 rounded">Página Siguiente</a>
+        <a href="/pedidos/{{ $pagina - 1 }}" class="{{ $pagina == 1 ? 'hidden' : '' }} {{ Auth::user()->currentTeam->name == 'Admin' ? 'hidden' : '' }} bg-white text-black font-bold text-center py-2 px-4 rounded">Página anterior</a>
+        <a href="/pedidos/{{ $pagina + 1 }}" class="{{ $totalRes < 10 ? 'hidden' : '' }} {{ Auth::user()->currentTeam->name == 'Admin' ? 'hidden' : '' }} bg-white text-black font-bold text-center py-2 px-4 rounded">Página Siguiente</a>
 
     </div>
 
