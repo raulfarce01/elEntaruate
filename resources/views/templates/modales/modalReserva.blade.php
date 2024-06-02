@@ -1,4 +1,4 @@
-<div id="modalReserva" class="hidden relative w-full h-screen bg-black/70 z-50 text-black">
+<div id="modalReserva" class="hidden fixed w-full h-screen bg-black/70 z-50 text-black">
     <div id="contentModalReserva" class="m-auto h-4/5 w-4/5 md:w-1/3 bg-white rounded-lg">
         <div id="topModalReserva" class="flex justify-end h-10">
             <i id="closeModalReserva" class="fa-solid fa-xmark cursor-pointer text-3xl p-2 h-fit"></i>

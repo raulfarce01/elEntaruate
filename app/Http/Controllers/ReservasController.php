@@ -50,6 +50,7 @@ class ReservasController extends Controller
 
             if($user->currentTeam->name == 'Admin'){
 
+
                 $newReservas = [];
 
                 $allReservas = DB::table('usuario_reservas')->join('users', 'users.id', '=', 'usuario_reservas.userId')->orderBy('fecha', 'asc')->get();
