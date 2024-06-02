@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Laravel\Jetstream\HasTeams;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PlatoController extends Controller
 {
@@ -38,11 +39,15 @@ class PlatoController extends Controller
 
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => $platos]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -58,11 +63,15 @@ class PlatoController extends Controller
 
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => $platos]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -94,11 +103,15 @@ class PlatoController extends Controller
 
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => $platos]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -117,11 +130,15 @@ class PlatoController extends Controller
                 return view('templates/platos_edit', [ 'plato' => $plato, 'allIngredientes' => $allIngredientes, 'ingredientesPlato' => $ingredientesPlato ]);
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => $platos]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -158,11 +175,11 @@ class PlatoController extends Controller
 
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => Plato::all()]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => Plato::all()]);
 
     }
 }

@@ -89,6 +89,7 @@ class Plato extends Model
             $plato->precio = $precio;
 
             if($newRuta != null){
+                unlink(public_path('img/' . $plato->rutaImagen));
                 $plato->rutaImagen = $newRuta;
             }
 
@@ -126,6 +127,8 @@ class Plato extends Model
         $plato = Plato::find($platoId);
 
         if(isset($plato)){
+
+            unlink(public_path('img/' . $plato->rutaImagen));
 
             $plato->delete();
             return redirect('/admin_gestion_platos');

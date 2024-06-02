@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cupon;
+use App\Models\Plato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +52,9 @@ class CuponController extends Controller
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver tu perfil']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -75,11 +78,15 @@ class CuponController extends Controller
 
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+            return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -101,11 +108,15 @@ class CuponController extends Controller
 
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+            return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 }

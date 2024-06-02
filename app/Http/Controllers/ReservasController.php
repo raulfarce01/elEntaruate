@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use App\Models\User;
+use App\Models\Plato;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -65,11 +66,15 @@ class ReservasController extends Controller
 
             }
 
-            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página']);
+            $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+            return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => $platos]);
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 }

@@ -155,7 +155,9 @@ class PedidoController extends Controller
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver tus pedidos']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -169,7 +171,9 @@ class PedidoController extends Controller
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión como administrador para finalizar los pedidos']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes ser administrador para ver esta página', 'platos' => $platos]);
 
     }
 }

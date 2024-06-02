@@ -111,7 +111,9 @@ class UserController extends Controller
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver tu perfil']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
@@ -131,7 +133,9 @@ class UserController extends Controller
 
         }
 
-        return view('templates/index', ['error' => 'Debes iniciar sesión para ver tu perfil']);
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['error' => 'Debes iniciar sesión para ver esta página', 'platos' => $platos]);
 
     }
 
