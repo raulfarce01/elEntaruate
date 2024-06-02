@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plato;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -15,7 +16,9 @@ class IndexController extends Controller
 
     public function index(){
 
-        return view('templates/index');
+        $platos = Plato::with('ingredientes')->take(4)->orderBy('created_at', 'desc')->get();
+
+        return view('templates/index', ['platos' => $platos]);
 
     }
 

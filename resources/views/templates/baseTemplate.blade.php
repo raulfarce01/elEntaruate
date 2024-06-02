@@ -38,7 +38,7 @@
             @if (Auth::user())
                 <p id="userHeader" class="cursor-pointer">Hola, {{ Auth::user()->name }} <i id="" class="fa-solid fa-angle-down"></i></p>
                 <div id="desplegableUser" class="absolute z-50 bg-black text-white rounded-md px-6 py-4 flex flex-col gap-4 justify-around items-center w-60 right-6 top-14 hidden">
-                    <a href="/user/pedidos">Mis Pedidos</a>
+                    <a href="/pedidos/1">Mis Pedidos</a>
                     <a href="/user">Mi Perfil</a>
                     <a href="/user/favoritos">Mis Favoritos</a>
                     <a href="/user/reservas">Mis Reservas</a>
@@ -72,7 +72,7 @@
                     <a href="/carta">Carta</a>
                     @if (Auth::user())
                         <a href="/cupones">Cupones</a>
-                        <a href="/user/pedidos">Mis Pedidos</a>
+                        <a href="/pedidos/1">Mis Pedidos</a>
                         <a href="/user">Mi Perfil</a>
                         <a href="/user/favoritos">Mis Favoritos</a>
                         <a href="/user/reservas">Mis Reservas</a>

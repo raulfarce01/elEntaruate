@@ -41,38 +41,34 @@
 <hr class="mx-3">
 <section id="platosVendidos" class="text-white py-5 md:px-7 ps-5 flex flex-col pe-5">
 
-    <h2 class="md:text-4xl text-4xl font-bold md:pb-10 pb-5 md:text-center">Nuestros Platos más vendidos</h2>
+    <h2 class="md:text-4xl text-4xl font-bold md:pb-10 pb-5 md:text-center">Nuestras últimas adiciones</h2>
 
-    <div id="platos" class="grid grid-cols-2 md:grid-cols-4 gap-5">
-        <div id="cardPlato" class="w-full h-full p-2 flex flex-col justify-content-around items-center" style="height: 450px">
-            <div id="imagePlato" class="w-full bg-slate-500 h-48"></div>
-            <div id="textoPlato" class="flex flex-col pt-3">
-                <h3 class="text-lg font-bold pb-4">Prueba de título para plato con muchas palabras</h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus sequi at quas quibusdam accusamus rem, debitis nobis mollitia quos dolores?</p>
+    <div id="platos" class="grid grid-cols-2 md:grid-cols-4 gap-5 pb-4">
+
+    @foreach ($platos as $plato)
+
+        <div id="cardPlato" class="w-full h-full p-2 flex flex-col justify-content-around items-center" style="">
+            <div id="imagePlato" class="w-full bg-slate-500 h-48">
+                <img class="w-full h-full object-cover" src="{{ asset('/img') ."/". $plato->rutaImagen }}" alt="{{ $plato->nombre }}">
+            </div>
+            <div id="textoPlato" class="flex w-full flex-col pt-3">
+                <h3 class="text-lg font-bold pb-4">{{ $plato->nombre }}</h3>
+                <p class="text-left">
+
+                    @foreach ($plato->ingredientes as $ingrediente)
+
+                        {{ $ingrediente->nombre }},
+
+                    @endforeach
+
+                </p>
             </div>
         </div>
-        <div id="cardPlato" class="w-full h-full p-2 flex flex-col justify-content-around items-center h-96" style="height: 450px">
-            <div id="imagePlato" class="w-full bg-slate-500 h-48"></div>
-            <div id="textoPlato" class="flex flex-col pt-3">
-                <h3 class="text-lg font-bold pb-4">Prueba de título para plato</h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus sequi at quas quibusdam accusamus rem, debitis nobis mollitia quos dolores?</p>
-            </div>
-        </div>
-        <div id="cardPlato" class="w-full h-full p-2 flex flex-col justify-content-around items-center" style="height: 450px">
-            <div id="imagePlato" class="w-full bg-slate-500 h-48"></div>
-            <div id="textoPlato" class="flex flex-col pt-3">
-                <h3 class="text-lg font-bold pb-4">Prueba de título para plato con muchas palabras</h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus sequi at quas quibusdam accusamus rem, debitis nobis mollitia quos dolores?</p>
-            </div>
-        </div>
-        <div id="cardPlato" class="w-full h-full p-2 flex flex-col justify-content-around items-center" style="height: 450px">
-            <div id="imagePlato" class="w-full bg-slate-500 h-48"></div>
-            <div id="textoPlato" class="flex flex-col pt-3">
-                <h3 class="text-lg font-bold pb-4">Prueba de título para plato con muchas palabras</h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus sequi at quas quibusdam accusamus rem, debitis nobis mollitia quos dolores?</p>
-            </div>
-        </div>
+
+    @endforeach
+
     </div>
+
 
 </section>
 

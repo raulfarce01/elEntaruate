@@ -49,7 +49,7 @@ Route::post('/edit_cupon_post/{idCupon}', [CuponController::class, 'editCuponPos
 Route::get('/user/favoritos', [UserController::class, 'favoritos'])->name('user_favoritos');
 Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::get('/user/reservas', [UserController::class, 'pageReservasUser'])->name('user_reservas');
-Route::get('/user/pedidos', [UserController::class, 'pedidos'])->name('user_pedidos');
+Route::get('/pedidos/1', [UserController::class, 'pedidos'])->name('user_pedidos');
 Route::get('/getReservas/user', [UserController::class, 'reservasUser'])->name('user_reservas');
 Route::post('/add_favorito/{platoId}', [UserController::class, 'addFavorito'])->name('favorito_add');
 /*Remove*/ Route::post('/remove_favorito/{idFavorito}', [UserController::class, 'removeFavorito'])->name('favorito_remove');
