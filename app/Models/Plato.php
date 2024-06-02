@@ -22,7 +22,7 @@ class Plato extends Model
     }
 
     public function cupones(){
-        return $this->belongsToMany(Cupon::class, 'cupon_plato', 'platoId', 'cuponId');
+        return $this->belongsToMany(Cupon::class, 'cupon_platos', 'platoId', 'cuponId');
     }
 
     public function ingredientes(){

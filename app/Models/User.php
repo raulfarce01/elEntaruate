@@ -69,7 +69,7 @@ class User extends Authenticatable
     ];
 
     public function pedidos(){
-        return $this->belongsToMany(Pedido::class);
+        return $this->hasMany(Pedido::class);
     }
 
     public function favoritos(){
@@ -102,8 +102,6 @@ class User extends Authenticatable
 
         $user = User::find(Auth::id());
         $fav = DB::table('favoritos')->where('userId', Auth::id())->where('id', $favId)->first();
-
-        dd($favId);
 
         if(isset($fav)){
 

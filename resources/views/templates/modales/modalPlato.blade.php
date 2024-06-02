@@ -1,4 +1,4 @@
-<div id="modalPlato" class="absolute top-0 left-0 w-full h-full overflow-auto flex justify-center items-center bg-black/70 hidden z-50">
+<div id="modalPlato" class="absolute top-0 left-0 w-full min-h-full overflow-auto flex justify-center items-center bg-black/70 hidden z-50">
 
     <div id="contentPlato" class="text-black bg-white rounded-md py-10 px-8 font-bold w-2/3 overflow-auto">
 

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Plato;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,29 +15,69 @@ class Pedido extends Model
     protected $table = 'pedidos';
 
     public function platos(){
-        return $this->belongsToMany(Plato::class, 'plato_pedidos', 'platoId', 'pedidoId');
+        return $this->belongsToMany(Plato::class, 'plato_pedidos', 'pedidoId', 'platoId');
     }
 
-    public static function addPedido($fecha, $platos){
+    public function users(){
+        return $this->belongsTo(User::class, 'userId');
+    }
 
-        if(/* Comprobar la sesión del usuario */){
+    public static function addPedido($idMesa, $platos, $cupones){
 
-            $pedido = new Pedido();
+        $newPlatos = [];
 
-            $pedido->fecha = $fecha;
-            $pedido->save();
+        if(Auth::user()){
+            $user = Auth::user();
+        }else{
+            $user = User::find(2);
+        }
 
-            foreach ($platos as $plato){
+        $pedido = new Pedido();
 
-                $pedido->platos()->attach($plato);
+        if($cupones != null){
 
+            foreach ($cupones as $cupon){
+
+                $cupon = DB::select("SELECT * FROM platos INNER JOIN cupon_platos ON platos.id = cupon_platos.platoId WHERE cupon_platos.cuponId = " . $cupon);
+
+                $newPlatos = $cupon;
             }
-
-            return new Response(json_encode(array("result" => 1, "message" => "Pedido creado correctamente")));
 
         }
 
-        return new Response(json_encode(array("result" => -1, "message" => "Ha ocurrido un error en la realización del pedido")));
+        $date = new \DateTime();
+        $fecha = $date->format('Y-m-d H:i:s');
+
+        $pedido->fecha = $fecha;
+        $pedido->mesa = $idMesa;
+        $pedido->userId = $user->id;
+        $pedido->save();
+
+        if($platos != null){
+
+            foreach ($platos as $plato){
+
+                $plato = Plato::find($plato);
+
+                $pedido->platos()->attach($plato->id);
+
+            }
+
+        }
+
+        if($newPlatos != null){
+
+            foreach ($newPlatos as $plato){
+
+                $platoDB = Plato::find($plato->platoId);
+
+                $pedido->platos()->attach($platoDB);
+
+            }
+
+        }
+
+        return redirect('/pedidos/1');
 
     }
 }

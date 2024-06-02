@@ -3,9 +3,6 @@ let flechaIndex = $('#flechaIndex');
 let cerrarModalError = $('#cerrarModalError');
 
 function abreModalReserva(idUser) {
-    $("html, body").animate({
-        scrollTop: 0
-    }, 500);
     if(idUser < 1){
         window.location.href = '/login';
     }

@@ -18,18 +18,18 @@
     <table id="platosTable" class="w-full">
         <thead>
             <th>ID</th>
+            <th>Imagen</th>
             <th>Nombre</th>
             <th>Precio</th>
-            <th>Imagen</th>
             <th>Acciones</th>
         </thead>
         <tbody>
             @foreach ($allPlatos as $plato)
             <tr class="">
                 <td class="text-center">{{ $plato['id'] }}</td>
+                <td class="text-center flex items-center justify-center"><img class="w-32" src="{{ asset('/img') ."/". $plato['rutaImagen'] }}" alt="{{ $plato['rutaImagen'] }}"></td>
                 <td class="text-center">{{ $plato['nombre'] }}</td>
                 <td class="text-center">{{ $plato['precio'] }}</td>
-                <td class="text-center flex items-center justify-center"><img class="w-32" src="{{ asset('/img') ."/". $plato['rutaImagen'] }}" alt="{{ $plato['rutaImagen'] }}"></td>
                 <td class="text-center">
                     <form action="{{ route('platos_edit', $plato['id']) }}" method="GET" class="inline w-fit me-1">
                         @csrf

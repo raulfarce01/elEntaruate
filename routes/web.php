@@ -24,9 +24,9 @@ Route::get('/contacto', [IndexController::class, 'contacto'])->name('contacto');
 Route::get('/sobre', [IndexController::class, 'sobre'])->name('sobre');
 
 
-Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos_lista');
-Route::get('/pedidos/{idPedido}/detalles', [PedidoController::class, 'detalles'])->name('pedidos_detalle');
-Route::get('/estado_pedido/{idPedido}', [PedidoController::class, 'estado'])->name('pedidos_estado');
+Route::get('/pedidos/{paginaPedido}', [PedidoController::class, 'index'])->name('pedidos_lista');
+Route::get('/new_pedido/{idMesa}', [PedidoController::class, 'newPedido'])->name('pedido_new');
+Route::get('/confirmar_pago', [PedidoController::class, 'confirmarPago'])->name('confirmar_pago');
 Route::post('/add_pedido', [PedidoController::class, 'addPedido'])->name('pedido_add');
 
 
@@ -55,7 +55,6 @@ Route::post('/add_favorito/{platoId}', [UserController::class, 'addFavorito'])->
 /*Remove*/ Route::post('/remove_favorito_user/{idPlato}', [UserController::class, 'removeFavoritoUser'])->name('favorito_remove_user');
 
 Route::post('/user', [UserController::class, 'index'])->name('user_update');
-
 
 
 Route::post('/add_reserva', [ReservasController::class, 'addReserva'])->name('reserva_add');
