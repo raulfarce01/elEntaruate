@@ -16,11 +16,8 @@ class CuponController extends Controller
 
         $nombre = $request->input('nombre');
         $descripcion = $request->input('descripcion');
-        $caducidadDate = $request->input('caducidadDate');
-        $caducidadHour = $request->input('caducidadHour');
+        $caducidad = $request->input('caducidad');
         $porcentaje = $request->input('porcentaje');
-
-        $caducidad = date_create($caducidadDate.' '.$caducidadHour);
 
         return Cupon::addCupon($nombre, $descripcion, $caducidad, $porcentaje);
 
@@ -45,7 +42,7 @@ class CuponController extends Controller
             if(Auth::user()->currentTeam->name == 'Admin'){
                 $allCupones = Cupon::with('platos')->get();
             }else{
-                $allCupones = Cupon::with('platos')->where('activo', '=', true)->get();
+                $allCupones = Cupon::with('platos')->where('activo', '=', true)->where('caducidad', '>=', date('Y-m-d'))->get();
             }
 
             return view('templates/cupones', ['allCupones' => $allCupones]);

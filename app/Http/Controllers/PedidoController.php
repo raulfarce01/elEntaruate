@@ -87,7 +87,7 @@ class PedidoController extends Controller
 
         if(Auth::user() && Auth::user()->currentTeam->name = 'Admin'){
 
-            $allCupones = Cupon::where('activo', '=', true)->get();
+            $allCupones = Cupon::with('platos')->where('activo', '=', true)->where('caducidad', '>=', date('Y-m-d'))->get();
             $favoritos = DB::select("SELECT * FROM favoritos INNER JOIN platos ON favoritos.platoId = platos.id WHERE userId = " . auth()->user()->id);
 
             foreach($favoritos as $plato){
