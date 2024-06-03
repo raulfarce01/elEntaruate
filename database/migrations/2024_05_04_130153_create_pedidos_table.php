@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->unsignedBigInteger('userId');
+            $table->integer("mesa");
             $table->timestamps();
 
             $table->foreign('userId')

@@ -24,6 +24,7 @@ class Pedido extends Model
 
     public static function addPedido($idMesa, $platos, $cupones){
 
+
         $newPlatos = [];
 
         if(Auth::user()){
