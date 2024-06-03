@@ -9,7 +9,7 @@
 
 <br>
 
-<p>Una vez lo tengas todo instalado, ejecutas el siguiente comando en consola: <i>php artisan migrate</i>, y una vez hecho, ejecuta el comando <i>php artisan db:seed</i></p>
+<p>Una vez lo tengas todo instalado creas el usuario insertando la linea de código del documento inserts.sql en phpmyadmin y, posteriormente, ejecutas el siguiente comando en consola: <i>php artisan migrate</i>, y una vez hecho, ejecuta el comando <i>php artisan db:seed</i>, y tras esto usa los comando <i>prp artisan serve</i> y <i>npm run dev</i> para finalizar</p>
 
 <br>
 
